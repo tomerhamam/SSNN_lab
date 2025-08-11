@@ -1,0 +1,105 @@
+{
+  "lab_title": "Self-Supervised Neural Networks Lab",
+  "version": "2.0",
+  "modules": [
+    {
+      "name": "Introduction to SSL",
+      "weight": 0.2,
+      "assessments": ["mcq1", "q1"]
+    },
+    {
+      "name": "Vision - Rotation Prediction",
+      "weight": 0.3,
+      "assessments": ["exercise1", "exercise2", "exercise3", "mcq2"]
+    },
+    {
+      "name": "Time Series - Autoencoder",
+      "weight": 0.3,
+      "assessments": ["exercise4", "q2"]
+    },
+    {
+      "name": "Advanced Concepts",
+      "weight": 0.2,
+      "assessments": ["exercise5", "q3"]
+    }
+  ],
+  "grading_scheme": {
+    "exercises": {
+      "exercise1": {"points": 10, "difficulty": "easy"},
+      "exercise2": {"points": 15, "difficulty": "medium"},
+      "exercise3": {"points": 15, "difficulty": "medium-hard"},
+      "exercise4": {"points": 20, "difficulty": "hard"},
+      "exercise5": {"points": 20, "difficulty": "advanced"}
+    },
+    "mcqs": {
+      "mcq1": {"points": 5},
+      "mcq2": {"points": 5}
+    },
+    "open_ended": {
+      "q1": {"points": 10, "rubric_items": 4},
+      "q2": {"points": 10, "rubric_items": 4},
+      "q3": {"points": 10, "rubric_items": 4}
+    },
+    "total_points": 120
+  },
+  "api_configuration": {
+    "provider": "gemini",
+    "model": "gemini-pro",
+    "temperature": 0.3,
+    "max_tokens": 1000,
+    "evaluation_prompt_template": "Evaluate the following answer to a self-supervised learning question.\n\nQuestion: {question}\n\nEvaluation Rubric:\n{rubric}\n\nReference Answer: {sample_answer}\n\nUser Answer: {user_answer}\n\nPlease evaluate the answer and provide:\n1. Score (0-100)\n2. Which rubric points were addressed\n3. What was missing or could be improved\n4. Any misconceptions to correct\n\nFormat your response as JSON with fields: score, rubric_met, strengths, improvements, feedback"
+  },
+  "gemini_integration": {
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent",
+    "api_key_env_var": "GEMINI_API_KEY",
+    "request_format": {
+      "contents": [
+        {
+          "parts": [
+            {"text": "evaluation_prompt"}
+          ]
+        }
+      ],
+      "generationConfig": {
+        "temperature": 0.3,
+        "maxOutputTokens": 1000,
+        "candidateCount": 1
+      }
+    }
+  },
+  "questions_database": [
+    {
+      "id": "q1",
+      "question": "Explain why rotation prediction is an effective pretext task for learning visual features. What properties of the task make it useful?",
+      "rubric": [
+        "Mentions that rotation is a geometric transformation",
+        "Notes that it requires understanding object structure",
+        "Explains that labels are free (self-supervised)",
+        "Discusses invariance/equivariance properties"
+      ],
+      "sample_answer": "Rotation prediction works because it forces the network to understand spatial structure and object geometry. The task requires recognizing features regardless of orientation, learning rotation-equivariant representations. Labels are automatically generated without human annotation."
+    },
+    {
+      "id": "q2",
+      "question": "Compare and contrast autoencoders with contrastive learning methods. When would you choose one over the other?",
+      "rubric": [
+        "Identifies autoencoders as generative/reconstructive",
+        "Identifies contrastive as discriminative",
+        "Mentions computational efficiency differences",
+        "Discusses use cases for each"
+      ],
+      "sample_answer": "Autoencoders learn by reconstruction, capturing all input details including noise. Contrastive methods learn by comparing samples, focusing on discriminative features. Autoencoders are simpler but may learn trivial solutions. Contrastive methods are more robust but require careful augmentation design."
+    },
+    {
+      "id": "q3",
+      "question": "Design a novel pretext task for learning representations from text data. Explain your reasoning.",
+      "rubric": [
+        "Proposes a specific, implementable task",
+        "Explains how labels are generated automatically",
+        "Justifies why the task would learn useful features",
+        "Considers computational feasibility"
+      ],
+      "sample_answer": "One novel task could be 'sentence ordering': given shuffled sentences from a paragraph, predict the correct order. This requires understanding discourse structure, temporal relationships, and causal dependencies. Labels come from the original ordering, making it fully self-supervised."
+    }
+  ]
+}
