@@ -11,10 +11,10 @@ def quick_api_test():
     print("=" * 30)
     
     # Check API key
-    api_key = os.getenv('ANTHROPIC_API_KEY')
+    api_key = os.getenv('MY_APP_ANTHROPIC_KEY')
     if not api_key:
-        print("❌ No ANTHROPIC_API_KEY found")
-        print("Set it with: export ANTHROPIC_API_KEY='your-key'")
+        print("❌ No MY_APP_ANTHROPIC_KEY found")
+        print("Set it with: export MY_APP_ANTHROPIC_KEY='your-key'")
         return False
     
     print(f"✅ API key found: {api_key[:8]}...")

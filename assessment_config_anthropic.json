@@ -1,0 +1,70 @@
+{
+  "lab_title": "Self-Supervised Neural Networks Lab",
+  "version": "2.1",
+  "api_configuration": {
+    "provider": "anthropic",
+    "model": "claude-3-haiku-20240307",
+    "temperature": 0.3,
+    "max_tokens": 500,
+    "api_key_env_var": "MY_APP_ANTHROPIC_KEY"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Explain why rotation prediction is an effective pretext task for learning visual features. What properties of the task make it useful?",
+      "rubric": [
+        "Mentions that rotation is a geometric transformation",
+        "Notes that it requires understanding object structure",
+        "Explains that labels are free (self-supervised)",
+        "Discusses invariance/equivariance properties"
+      ],
+      "sample_answer": "Rotation prediction works because it forces the network to understand spatial structure and object geometry. The task requires recognizing features regardless of orientation, learning rotation-equivariant representations. Labels are automatically generated without human annotation."
+    },
+    {
+      "id": "q2",
+      "question": "Compare and contrast autoencoders with contrastive learning methods. When would you choose one over the other?",
+      "rubric": [
+        "Identifies autoencoders as generative/reconstructive",
+        "Identifies contrastive as discriminative",
+        "Mentions computational efficiency differences",
+        "Discusses use cases for each"
+      ],
+      "sample_answer": "Autoencoders learn by reconstruction, capturing all input details including noise. Contrastive methods learn by comparing samples, focusing on discriminative features. Autoencoders are simpler but may learn trivial solutions. Contrastive methods are more robust but require careful augmentation design."
+    },
+    {
+      "id": "q3",
+      "question": "Design a novel pretext task for learning representations from text data. Explain your reasoning.",
+      "rubric": [
+        "Proposes a specific, implementable task",
+        "Explains how labels are generated automatically",
+        "Justifies why the task would learn useful features",
+        "Considers computational feasibility"
+      ],
+      "sample_answer": "One novel task could be 'sentence ordering': given shuffled sentences from a paragraph, predict the correct order. This requires understanding discourse structure, temporal relationships, and causal dependencies. Labels come from the original ordering, making it fully self-supervised."
+    }
+  ],
+  "grading_scheme": {
+    "open_ended": {
+      "q1": {
+        "points": 100,
+        "rubric_items": 4
+      },
+      "q2": {
+        "points": 100,
+        "rubric_items": 4
+      },
+      "q3": {
+        "points": 100,
+        "rubric_items": 4
+      }
+    },
+    "total_points": 300
+  },
+  "cost_estimate": {
+    "model": "claude-3-haiku",
+    "input_tokens_per_eval": "~500",
+    "output_tokens_per_eval": "~200",
+    "cost_per_eval": "~$0.0004",
+    "note": "Haiku is 10x cheaper than Sonnet, perfect for educational use"
+  }
+}

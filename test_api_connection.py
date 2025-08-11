@@ -24,15 +24,15 @@ def test_environment_setup():
         print("✅ Python version is compatible")
     
     # Check for API key
-    api_key = os.getenv('ANTHROPIC_API_KEY')
+    api_key = os.getenv('MY_APP_ANTHROPIC_KEY')
     if api_key:
         print(f"✅ API key found (starts with: {api_key[:8]}...)")
         return True, api_key
     else:
-        print("❌ ANTHROPIC_API_KEY not found in environment")
+        print("❌ MY_APP_ANTHROPIC_KEY not found in environment")
         print("\n🔧 To fix this:")
         print("1. Get API key from: https://console.anthropic.com/")
-        print("2. Add to ~/.bashrc: export ANTHROPIC_API_KEY='your-key-here'")
+        print("2. Add to ~/.bashrc: export MY_APP_ANTHROPIC_KEY='your-key-here'")
         print("3. Run: source ~/.bashrc")
         print("4. Restart this script")
         return False, None
@@ -106,7 +106,7 @@ def test_json_parsing():
     print("\n🔧 Testing Assessment Format")
     print("=" * 50)
     
-    api_key = os.getenv('ANTHROPIC_API_KEY')
+    api_key = os.getenv('MY_APP_ANTHROPIC_KEY')
     if not api_key:
         print("⚠️ Skipping - no API key available")
         return False
