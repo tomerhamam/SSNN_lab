@@ -26,26 +26,28 @@ python test_api_connection.py  # Comprehensive test (optional)
 
 ### 4. **Start Learning!**
 ```bash
-jupyter notebook snn_lab_interactive_anthropic.ipynb
+jupyter notebook snn_lab_complete.ipynb
 ```
 
 ## 📚 What's Included
 
-### **Main Notebook**: `snn_lab_interactive_anthropic.ipynb`
-This is your complete learning environment with:
+### **Main Notebook**: `snn_lab_complete.ipynb`
+This is your complete 2-hour interactive learning experience with:
 
 #### 🧠 **Interactive Learning Components**
-- **5 Progressive Coding Exercises** (easy → advanced)
-- **Fill-in-the-Blank Templates** with guided hints
+- **10 Progressive Coding Exercises** (easy → advanced)
+- **Fill-in-the-Blank Code Templates** with guided hints
 - **Multiple Choice Questions** with instant feedback
 - **3 Open-Ended Questions** with AI evaluation
 - **Critical Thinking Prompts** throughout
+- **Real-time Visualization** of learned features
 
-#### 📖 **Educational Modules**
-1. **Introduction to SSL** - Core concepts and paradigms
-2. **Computer Vision** - Rotation prediction pretext task
-3. **Time Series** - Autoencoder-based reconstruction  
-4. **Advanced Concepts** - Contrastive learning extensions
+#### 📖 **Educational Modules** (2-hour structured learning)
+1. **Part 1: Introduction & Setup** (15 min) - Core concepts, data exploration
+2. **Part 2: Computer Vision SSL** (45 min) - Rotation prediction, neural networks
+3. **Part 3: Time Series SSL** (30 min) - Autoencoder implementation
+4. **Part 4: Advanced Concepts** (15 min) - Creative extensions, novel pretext tasks  
+5. **Part 5: Assessment & Reflection** (15 min) - AI-powered evaluation
 
 #### 🤖 **AI-Powered Assessment**
 - **Automatic Evaluation** using Claude 3 Haiku
@@ -58,11 +60,16 @@ This is your complete learning environment with:
 ### **Exercises Overview**
 | Exercise | Difficulty | Topic | Skills |
 |----------|------------|-------|--------|
-| 1 | Easy | Data Augmentation | NumPy, image rotations |
-| 2 | Medium | Neural Network Forward Pass | Matrix operations, softmax |
-| 3 | Medium-Hard | Feature Visualization | Analysis, interpretation |
-| 4 | Hard | Autoencoder Implementation | Backpropagation, MSE loss |
-| 5 | Advanced | Contrastive Learning | Distance metrics, pair generation |
+| 1 | Easy | Data Visualization | NumPy, matplotlib, data exploration |
+| 2 | Easy-Medium | Rotation Dataset Creation | Image transformations, labeling |
+| 3 | Medium | Neural Network Forward Pass | Matrix operations, softmax |
+| 4 | Medium-Hard | Training & Evaluation | Gradient descent, metrics |
+| 5 | Hard | Transfer Learning Analysis | Feature extraction, performance |
+| 6 | Medium | Time Series Generation | Synthetic data, signal processing |
+| 7 | Hard | Autoencoder Implementation | Backpropagation, MSE loss |
+| 8 | Advanced | Reconstruction Quality | Visualization, error analysis |
+| 9 | Advanced | Embedding Classification | Dimensionality reduction, t-SNE |
+| 10 | Creative | Novel Pretext Task Design | Innovation, domain knowledge |
 
 ### **Assessment Questions**
 1. **Why is rotation prediction effective?** (Visual SSL concepts)
@@ -126,12 +133,13 @@ Checks: Environment, dependencies, full API functionality, cost estimation
 
 ```
 snn_lab/
-├── snn_lab_interactive_anthropic.ipynb  # Main interactive notebook
-├── quick_test.py                        # Fast API verification
-├── test_api_connection.py               # Comprehensive testing
-├── tests/snn_lab.py                     # Standalone implementation
-├── CLAUDE.md                            # Development guidelines
-└── TO_BE_DELETED/                       # Outdated files
+├── snn_lab_complete.ipynb              # Main comprehensive tutorial (NEW!)
+├── quick_test.py                       # Fast API verification
+├── test_api_connection.py              # Comprehensive testing
+├── tests/snn_lab.py                    # Standalone implementation
+├── CLAUDE.md                           # Development guidelines
+├── snn_lab_interactive_anthropic.ipynb # Assessment-only notebook
+└── TO_BE_DELETED/                      # Outdated files
 ```
 
 ## 🎯 Getting Started Checklist
@@ -140,8 +148,8 @@ snn_lab/
 - [ ] Add API key to environment: `export MY_APP_ANTHROPIC_KEY="key"`
 - [ ] Install dependencies: `pip install anthropic`
 - [ ] Test setup: `python quick_test.py`
-- [ ] Open notebook: `jupyter notebook snn_lab_interactive_anthropic.ipynb`
-- [ ] Complete exercises and get AI feedback!
+- [ ] Open notebook: `jupyter notebook snn_lab_complete.ipynb`
+- [ ] Complete the 2-hour interactive tutorial and get AI feedback!
 
 ## 🌟 Learning Outcomes
 

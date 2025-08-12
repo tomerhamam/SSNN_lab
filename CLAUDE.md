@@ -17,15 +17,16 @@ The codebase uses scikit-learn and NumPy without external deep learning framewor
 python tests/snn_lab.py  # Run all experiments and tests
 ```
 
-### Running the Jupyter Tutorial
+### Running the Interactive Tutorial
 ```bash
-jupyter notebook snn_lab_tutorial.ipynb
+jupyter notebook snn_lab_complete.ipynb  # Main 2-hour comprehensive tutorial
 ```
 
 ### Package Management
 - Uses `uv` package manager (pyproject.toml configured)
 - Python >=3.12 required
-- Dependencies: numpy, scikit-learn
+- Dependencies: numpy, scikit-learn, matplotlib, seaborn, anthropic
+- Environment: `MY_APP_ANTHROPIC_KEY` for AI-powered assessment
 
 ## Architecture & Structure
 
