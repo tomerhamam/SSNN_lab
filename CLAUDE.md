@@ -4,68 +4,115 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Self-Supervised Neural Networks (SNN) lab implementation that demonstrates self-supervised learning principles across two domains:
-- **Computer Vision**: Using handwritten digits (8×8 pixels) with rotation prediction as a pretext task
-- **Time Series**: Using synthetic sine sequences with autoencoder-based reconstruction
+This is an educational Self-Supervised Neural Networks (SSL) lab that teaches SSL principles through hands-on implementation. The project has two parallel structures:
+1. **Standalone implementation** (`tests/snn_lab.py`) - Complete working code with all classes
+2. **Interactive tutorial** (`snn_lab_complete.ipynb`) - 2-hour guided learning experience with exercises
 
-The codebase uses scikit-learn and NumPy without external deep learning frameworks to keep implementations lightweight and educational.
+The codebase demonstrates SSL across two domains:
+- **Computer Vision**: Rotation prediction on 8×8 handwritten digits → transfer to digit classification
+- **Time Series**: Autoencoder reconstruction of sine waves → transfer to frequency classification
 
 ## Key Commands
 
-### Running the Lab
+### Running Tests and Experiments
 ```bash
-python tests/snn_lab.py  # Run all experiments and tests
+# Run all SSL experiments and tests
+python tests/snn_lab.py
+
+# Run individual test functions
+python -c "from tests.snn_lab import test_rotation_accuracy; test_rotation_accuracy()"
+python -c "from tests.snn_lab import test_digit_transfer; test_digit_transfer()"
+python -c "from tests.snn_lab import test_time_series_transfer; test_time_series_transfer()"
 ```
 
-### Running the Interactive Tutorial
+### API Testing (for assessment features)
 ```bash
-jupyter notebook snn_lab_complete.ipynb  # Main 2-hour comprehensive tutorial
+# Quick 30-second verification
+python quick_test.py
+
+# Comprehensive API and environment test
+python test_api_connection.py
+```
+
+### Interactive Learning
+```bash
+# Main tutorial notebook (recommended starting point)
+jupyter notebook snn_lab_complete.ipynb
 ```
 
 ### Package Management
-- Uses `uv` package manager (pyproject.toml configured)
-- Python >=3.12 required
-- Dependencies: numpy, scikit-learn, matplotlib, seaborn, anthropic
-- Environment: `MY_APP_ANTHROPIC_KEY` for AI-powered assessment
+```bash
+# Using uv (preferred)
+uv pip install -r pyproject.toml
 
-## Architecture & Structure
+# Standard pip
+pip install anthropic numpy scikit-learn matplotlib seaborn
+```
 
-### Core Components
+## Architecture & Code Structure
 
-1. **Vision Module** (`TwoLayerNet` class)
-   - Simple 2-layer neural network with tanh activation
-   - Trained on rotation prediction (0°, 90°, 180°, 270°)
-   - Hidden representations transferred to digit classification
+### Two-Phase SSL Workflow
+Both vision and time series modules follow the same pattern:
+1. **Pretext Task Phase**: Train on self-supervised objective (rotation/reconstruction)
+2. **Transfer Phase**: Extract learned features → evaluate on downstream classification
 
-2. **Time Series Module** (`Autoencoder` class)
-   - Single hidden layer autoencoder
-   - Reconstructs noisy sine sequences
-   - Embeddings used for frequency classification
+### Core Neural Network Classes
 
-3. **Data Generation**
-   - `load_digit_data()`: Normalizes sklearn digits to [0,1]
-   - `create_rotation_dataset()`: Generates rotated versions with labels
-   - `generate_sine_sequences()`: Creates synthetic sine waves with two frequencies
+#### `TwoLayerNet` (Vision SSL)
+- Location: Defined in both `tests/snn_lab.py` and `snn_lab_complete.ipynb`
+- Architecture: input(64) → hidden(32) → output(4)
+- Activation: tanh hidden layer, softmax output
+- Training: Mini-batch SGD with manual backpropagation
+- Key methods: `forward()`, `backward()`, `hidden_representation()`, `train()`
 
-### Key Design Patterns
+#### `Autoencoder` (Time Series SSL)
+- Location: Defined in both files
+- Architecture: input(50) → hidden(16) → output(50)
+- Activation: tanh encoder, linear decoder
+- Loss: Mean Squared Error (MSE)
+- Key methods: `forward()`, `encode()`, `reconstruct()`, `train()`
 
-- All neural networks implemented from scratch using NumPy
-- Gradient descent with manual backpropagation
-- Transfer learning workflow: pretext task → feature extraction → downstream classification
-- Test-driven development with assertion-based validation
+### Data Generation Functions
+- `load_digit_data()`: Loads sklearn digits, normalizes to [0,1]
+- `create_rotation_dataset()`: Generates 4x data with rotation labels (0°, 90°, 180°, 270°)
+- `generate_sine_sequences()`: Creates binary classification dataset (freq=1.0 vs freq=3.0)
 
-## Testing Strategy
+### Assessment System
+The notebook includes AI-powered evaluation using Claude API:
+- Config: `assessment_config_anthropic.json`
+- Environment: Requires `MY_APP_ANTHROPIC_KEY`
+- Class: `OpenEndedAssessment` handles question evaluation
+- Fallback: Manual evaluation mode when API unavailable
 
-The codebase includes three main test functions in `tests/snn_lab.py`:
-- `test_rotation_accuracy()`: Verifies rotation classifier beats random chance (>40%)
-- `test_digit_transfer()`: Ensures SSL features achieve ≥50% digit classification accuracy
-- `test_time_series_transfer()`: Validates autoencoder embeddings preserve discriminative power
+## Testing Requirements
 
-Run all tests via `run_all_tests()` or execute the main script.
+The test suite validates SSL effectiveness:
+- **Rotation accuracy**: Must exceed 40% (random = 25%)
+- **Digit transfer**: SSL features must achieve ≥50% accuracy
+- **Time series transfer**: Embeddings must preserve discriminative power
 
-## Important Notes
+## Implementation Details
 
-- The lab prioritizes educational clarity over performance
-- Models intentionally use small architectures to demonstrate concepts
-- Random seeds are fixed for reproducibility (rng seed=0 for vision, seed=1 for time series)
-- Normalization is applied to time series data for training stability
+### Reproducibility
+- Fixed random seeds: `rng(0)` for vision, `rng(1)` for time series
+- Consistent data splits: `random_state=42` for train/test splits
+
+### Data Preprocessing
+- **Vision**: Digits normalized to [0,1] by dividing by 16
+- **Time Series**: Per-sequence normalization (zero mean, unit variance)
+
+### Training Hyperparameters
+- **Vision**: learning_rate=0.3, epochs=15, batch_size=256
+- **Time Series**: learning_rate=0.05, epochs=30, batch_size=128
+
+## Development Tips
+
+### Working with the Notebook
+- Cells must be run sequentially (class definitions before usage)
+- `test_net` is instantiated at the end of cell 14 (TwoLayerNet definition)
+- Solutions are provided after each exercise for self-checking
+
+### Common Issues
+- If `test_net` is undefined: Ensure cell 14 (TwoLayerNet class) ran completely
+- For API assessment: Check `MY_APP_ANTHROPIC_KEY` is exported in environment
+- Notebook exercises use "FILL" placeholders for student completion
