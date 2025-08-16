@@ -8,3 +8,18 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Dataset directories
+data/
+datasets/
+*.csv
+*.json
+*.h5
+*.hdf5
+*.npz
+*.pkl
+*.pickle
+
+# Generated results
+*_results_*.json
+comprehensive_ssl_results_*.json
