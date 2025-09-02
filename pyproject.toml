@@ -10,4 +10,15 @@ dependencies = [
     "numpy>=2.3.2",
     "scikit-learn>=1.7.1",
     "seaborn>=0.13.0",
+    # TensorBoard and ML Dependencies
+    "tensorboard==2.16.2",
+    "torch==2.2.2",
+    # Interpretability Tools
+    "captum==0.7.0",
+    "shap==0.45.1",
+    "lime==0.2.0.1",
+    "grad-cam==1.4.8",
+    "pytorch-grad-cam==1.4.8",
+    "plotly==5.17.0",
+    "pandas==2.2.2",
 ]
