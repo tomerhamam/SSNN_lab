@@ -1,0 +1,30 @@
+models:
+	auto_select: true
+	primary: "auto"
+	fallback: "clip-vit-b-32"
+	cache_dir: "~/.cache/video_pipeline"
+	download_on_start: true
+	verify_checksums: true
+
+extraction:
+	fps: 1
+	resize: [224, 224]
+
+captioning:
+	model: "auto"
+	batch_size: "auto"
+
+distillation:
+	method: "keyword"
+	focus: ["objects", "actions", "people"]
+
+merging:
+	min_duration: 2.0
+	similarity_threshold: 0.8
+
+runtime:
+	num_workers: 0
+	output_dir: "outputs"
+	artifacts_dir: "artifacts"
+	overwrite: false
+	checkpoint: true
